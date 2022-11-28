@@ -53,6 +53,16 @@ const AuthorType = new GraphQLObjectType({
     },
     name: {
       type: GraphQLNonNull(GraphQLString),
+      //if the current object already contains the object pair
+      // resolve is not required
+    },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve: (author) => {
+        return books.filter((book) => book.authorId === author.id);
+        //if data from another object / collection is required
+        // requires resolve function
+      },
     },
   }),
 });
