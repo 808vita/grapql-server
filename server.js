@@ -141,6 +141,16 @@ const RootMutationType = new GraphQLObjectType({
         return author;
       },
     },
+    deleteAuthor: {
+      type: new GraphQLList(AuthorType),
+      description: "edit an author",
+      args: {
+        id: { type: GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (parent, args) => {
+        return authors.filter((author) => author.id !== args.id);
+      },
+    },
   }),
 });
 
